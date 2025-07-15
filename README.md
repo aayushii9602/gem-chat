@@ -166,4 +166,34 @@ STRIPE_SECRET_KEY=sk_test_...
 ```env
 STRIPE_PRO_PRICE_ID=price_123abcXYZ
 ```
+---
+## 🧪 Webhook Testing with Stripe CLI (Dev Only)
 
+### 1. Install Stripe CLI
+
+Install it from the official documentation:  
+👉 [https://stripe.com/docs/stripe-cli](https://stripe.com/docs/stripe-cli)
+
+---
+
+### 2. Run Webhook Listener
+
+After starting your backend server, open a new terminal and run:
+
+```bash
+stripe listen --forward-to localhost:2001/api/v1/subscription/webhook/stripe
+```
+
+You will see a webhook secret in the terminal that looks like:
+
+``` whsec_... ```
+
+Copy that and add it to your .env file:
+```bash
+STRIPE_WEBHOOK_SECRET=whsec_...
+```
+
+And run the project:
+```bash
+npm run dev
+```
