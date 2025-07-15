@@ -13,6 +13,11 @@ const userSchema = new mongoose.Schema(
       default: "Basic",
     },
     subscriptionExpiresAt: { type: Date },
+    subscriptionTier: {
+      type: String,
+      enum: ["Basic", "Pro"],
+      default: "Basic",
+    },
   },
   { timestamps: true }
 );
