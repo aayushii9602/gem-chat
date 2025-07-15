@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 connectDB();
 
 // router middleware
-app.use("/api/v1", userRoutes);
-app.use("/api/v1", chatroomRoutes);
+app.use("/api/v1/user", userRoutes);
+app.use("/api/v1/chatroom", chatroomRoutes);
 
 export default app;
