@@ -140,5 +140,30 @@ DOMAIN=http://localhost:3000         # For Stripe redirect
 ```env
 GOOGLE_API_KEY=your_google_gemini_api_key
 ```
+---
 
+## 💳 Stripe Setup (Sandbox/Test Mode)
+
+### 1. Get Your Stripe API Keys
+
+- Go to the [Stripe Dashboard](https://dashboard.stripe.com)
+- Navigate to **Developers → API keys**
+- Copy your **Secret key** (starts with `sk_test_...`)
+- Add it to your `.env` file:
+
+```env
+STRIPE_SECRET_KEY=sk_test_...
+```
+## 💳 2. Create Product and Price
+
+1. In your [Stripe Dashboard](https://dashboard.stripe.com), go to **Products**
+2. Click **+ Add product**
+3. Fill in the product name (e.g., **Pro Subscription**)
+4. Add a **Recurring Price** (e.g., ₹100/month)
+5. After saving, copy the **Price ID** (e.g., `price_123abcXYZ`)
+6. Add it to your `.env` file:
+
+```env
+STRIPE_PRO_PRICE_ID=price_123abcXYZ
+```
 
