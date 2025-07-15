@@ -1,37 +1,3 @@
-// export async function createCheckoutSession(req, res, next) {
-//   const user = req.user; // from auth middleware
-
-//   try {
-//     const session = await stripe.checkout.sessions.create({
-//       payment_method_types: ["card"],
-//       mode: "subscription",
-//       line_items: [
-//         {
-//           price: process.env.STRIPE_PRICE_ID,
-//           quantity: 1,
-//         },
-//       ],
-//       customer_email: user.email,
-//       success_url: `${process.env.DOMAIN}/success?session_id={CHECKOUT_SESSION_ID}`,
-//       cancel_url: `${process.env.DOMAIN}/cancel`,
-//     });
-
-//     res.status(200).json({ url: session.url });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Stripe session creation failed." });
-//   }
-// }
-
-// export async function getSubscriptionStatus(req, res) {
-//   try {
-//     const user = await userModel.findById(req.user._id);
-//     res.status(200).json({ tier: user.subscriptionTier || "basic" });
-//   } catch (err) {
-//     res.status(500).json({ message: "Error checking subscription." });
-//   }
-// }
-
 import Stripe from "stripe";
 import dotenv from "dotenv";
 import { UserModel } from "../models/userModel.js";
@@ -39,7 +5,7 @@ import { UserModel } from "../models/userModel.js";
 dotenv.config();
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const DOMAIN = process.env.DOMAIN || "http://localhost:3000";
+const DOMAIN = process.env.DOMAIN;
 
 // 1. Start Checkout Session
 export async function createStripeCheckoutSession(req, res) {
@@ -48,7 +14,7 @@ export async function createStripeCheckoutSession(req, res) {
       payment_method_types: ["card"],
       line_items: [
         {
-          price: process.env.STRIPE_PRO_PRICE_ID, // e.g., "price_123..."
+          price: process.env.STRIPE_PRO_PRICE_ID,
           quantity: 1,
         },
       ],
@@ -102,7 +68,7 @@ export async function handleStripeWebhook(req, res) {
 // 3. Get Subscription Tier
 export async function getSubscriptionStatus(req, res) {
   try {
-    const user = await UserModel.findOne({ email: req.user.email });
+    const user = await UserModel.findOne({ _id: req.user._id });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });

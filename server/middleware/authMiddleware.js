@@ -13,7 +13,7 @@ export async function authMiddleware(req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     // console.log("DECODED:", decoded);
-    const user = await UserModel.findOne({ email: decoded.email });
+    const user = await UserModel.findOne({ _id: decoded.userId });
     // console.log("USER:", user);
     req.user = user;
     next();

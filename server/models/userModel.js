@@ -4,14 +4,10 @@ const userSchema = new mongoose.Schema(
   {
     mobile: { type: String, required: true, unique: true },
     name: { type: String },
+    email: { type: String, required: true, unique: true },
     otp: { type: String }, // hashed or plain for dev
     otpExpiresAt: { type: Date },
     password: { type: String },
-    subscription: {
-      type: String,
-      enum: ["Basic", "Pro"],
-      default: "Basic",
-    },
     subscriptionExpiresAt: { type: Date },
     subscriptionTier: {
       type: String,
