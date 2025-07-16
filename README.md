@@ -197,3 +197,5 @@ And run the project:
 ```bash
 npm run dev
 ```
+
+[you can access the postman collection](https://winter-desert-799128.postman.co/workspace/Personal-Workspace~d22799e7-062a-4878-b8ad-26f67fc0f526/collection/17274677-5a4a639b-80da-49a6-94eb-6916973a2584?action=share&creator=17274677)
