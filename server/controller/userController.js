@@ -21,8 +21,8 @@ function generateToken(userId) {
 export async function signup(req, res) {
   try {
     console.log(req.body);
-    const { mobile, name } = req.body;
-    console.log(mobile, name);
+    const { mobile, name, email} = req.body;
+    console.log(mobile, name, email);
     if (!mobile)
       return res.status(400).json({ message: "Mobile number is required" });
 
@@ -30,7 +30,7 @@ export async function signup(req, res) {
     if (user)
       return res.status(200).json({ message: "User already exists", user });
 
-    user = await UserModel.create({ mobile, name });
+    user = await UserModel.create({ mobile, name, email });
     return res
       .status(201)
       .json({ message: "User registered successfully", user });
